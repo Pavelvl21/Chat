@@ -5,3 +5,5 @@ const init = () => {
 		<App />
 	);
 };
+
+export default init;
