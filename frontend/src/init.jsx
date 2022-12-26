@@ -1,4 +1,4 @@
-import App from './src/components/App.jsx';
+import App from './components/App.jsx';
 
 const init = () => {
 	return (
