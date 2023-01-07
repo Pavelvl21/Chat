@@ -1,9 +1,7 @@
 import App from './components/App.jsx';
 
-const init = () => {
-	return (
-		<App />
-	);
-};
+const init = () => (
+  <App />
+);
 
 export default init;

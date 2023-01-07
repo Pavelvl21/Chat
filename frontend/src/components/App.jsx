@@ -1,26 +1,21 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ErrorPage from "./ErrorPage";
-// import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NotFoundPage from './NotFoundPage.jsx';
+import LoginPage from './LoginPage.jsx';
+import Navbar from './Navbar';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <div>Hello world!</div>,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: 'login',
-    element: <div>There will authorization on this page</div>,
-  },
-]);
+import '../assets/app.scss';
 
-const App = () => {
-  return (
+const App = () => (
+  <Router>
     <div className="d-flex flex-column vh-100">
-<RouterProvider router={router} />
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<div>Hello, piplz</div>} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
-    
-  );
-};
+  </Router>
+);
 
 export default App;

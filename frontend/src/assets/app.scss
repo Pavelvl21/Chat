@@ -1,0 +1,49 @@
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "~bootstrap/scss/mixins/banner";
+@include bsBanner("");
+@import "~bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+$border-color-translucent: rgba(0, 0, 0, 0.125);
+$input-border-radius: 0.25rem;
+$border-radius: .25rem;
+$border-radius-sm: .2rem;
+$border-radius-lg: .3rem;
+$border-radius-pill: 50rem;
+// $modal-fade-transform:              translate(0, -50px);
+// $modal-show-transform:              none;
+// $modal-transition:                  transform .3s ease-out;
+// $modal-scale-transform:             scale(1.02);
+
+@import "~bootstrap/scss/bootstrap";
+
+// // 3. Include remainder of required Bootstrap stylesheets
+// @import "~bootstrap/scss/variables";
+
+// // 4. Include any default map overrides here
+
+// // 5. Include remainder of required parts
+// @import "~bootstrap/scss/maps";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/root";
+
+// // 6. Optionally include any other parts as needed
+// @import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/list-group";
+// @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/containers";
+// @import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/modal";
+
+// // 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+// @import "~bootstrap/scss/utilities/api";
+
+// 8. Add additional custom code here
