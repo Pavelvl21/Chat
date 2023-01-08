@@ -4,10 +4,10 @@
   "description": "chat",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --prefix build",
+    "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd frontend && npm ci"
+    "postinstall": "cd frontend && npm ci --prefix frontend"
   },
   "repository": {
     "type": "git",
