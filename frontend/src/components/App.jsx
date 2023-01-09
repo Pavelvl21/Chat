@@ -34,7 +34,6 @@ const AuthProvider = ({ children }) => {
 
 const PrivateOutlet = () => {
   const auth = useAuth();
-  console.log(auth);
   return auth.user ? <Outlet /> : <Navigate to="/login" />;
 };
 
