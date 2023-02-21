@@ -36,8 +36,8 @@ const LoginPage = () => {
       onSubmit={async (values) => {
         setAuthFailed('');
         try {
-          const response = await axios.post('/api/v1/login', values);
-          auth.logIn(response.data);
+          const { data } = await axios.post('/api/v1/login', values);
+          auth.logIn(data);
           const { from } = location.state || { from: { pathname: '/' } };
           navigate(from);
         } catch (error) {

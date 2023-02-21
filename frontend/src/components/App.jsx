@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from 'react';
-
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,28 +8,13 @@ import {
 } from 'react-router-dom';
 import NotFoundPage from './NotFoundPage.jsx';
 import LoginPage from './LoginPage.jsx';
+import ChatPage from './ChatPage.jsx';
 import Navbar from './Navbar';
+import AuthProvider from './AuthProvider.jsx';
 
 import '../assets/app.scss';
-import AuthContext from '../contexts/index.jsx';
+
 import useAuth from '../hooks/index.js';
-
-const AuthProvider = ({ children }) => {
-  const currentUser = JSON.parse(localStorage.getItem('user'));
-  const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
-  const logIn = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser({ username: userData.username });
-  };
-
-  const auth = useMemo(() => ({ logIn, user }), [user]);
-
-  return (
-    <AuthContext.Provider value={auth}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
 
 const PrivateOutlet = () => {
   const auth = useAuth();
@@ -45,7 +29,7 @@ const App = () => (
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<PrivateOutlet />}>
-            <Route path="" element={<h1>You did it, mthfckr!</h1>} />
+            <Route path="" element={<ChatPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
