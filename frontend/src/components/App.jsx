@@ -24,7 +24,7 @@ const PrivateOutlet = () => {
 const App = () => (
   <AuthProvider>
     <Router>
-      <div className="d-flex flex-column vh-100">
+      <div className="d-flex flex-column h-100">
         <Navbar />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
