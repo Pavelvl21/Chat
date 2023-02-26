@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
 
 import '../assets/app.scss';
-import AuthContext from '../contexts/index.jsx';
+import Context from '../contexts/index.js';
 
-const currentUser = JSON.parse(localStorage.getItem('user'));
+const { AuthContext } = Context;
 const AuthProvider = ({ children }) => {
+  const currentUser = JSON.parse(localStorage.getItem('user'));
   const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
 
   const logIn = (userData) => {
@@ -12,7 +13,10 @@ const AuthProvider = ({ children }) => {
     setUser({ username: userData.username });
   };
 
-  const getAuthHeader = () => (currentUser?.token ? { Authorization: `Bearer ${currentUser.token}` } : {});
+  const getAuthHeader = () => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    return (userData?.token ? { Authorization: `Bearer ${userData.token}` } : {});
+  };
   const auth = useMemo(() => ({ logIn, getAuthHeader, user }), [user]);
 
   return (
