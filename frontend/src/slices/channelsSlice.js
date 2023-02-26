@@ -17,6 +17,10 @@ const commentsSlice = createSlice({
       state.channels = channels;
       state.currentChannelId = currentChannelId;
     },
+    setCurrentChannel: (state, { payload }) => {
+      const { channelId } = payload;
+      state.currentChannelId = channelId;
+    },
   },
 });
 
