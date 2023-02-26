@@ -49,17 +49,15 @@ const MessageForm = ({ channel }) => {
 };
 
 const ChatBox = () => {
-  // const getCurrentChannel = (state) => {
-  //   const { channels, currentChannelId } = state.channelsInfo;
-  //   return channels.find((c) => c.id === currentChannelId);
-  // };
-  const channel = useSelector((state) => {
-    const { channelsData: { channels } } = state;
-    return channels;
+  const currentChannel = useSelector((state) => {
+    const { channelsData: { channels, currentChannelId } } = state;
+    return channels.find((channel) => channel.id === currentChannelId);
   });
-  const newMessages = useSelector((state) => {
+
+  const channelMessages = useSelector((state) => {
     const { messages } = state.messagesData;
-    return messages;
+    const { currentChannelId } = state.channelsData;
+    return messages.filter(({ channelId }) => channelId === currentChannelId);
   });
 
   return (
@@ -68,12 +66,12 @@ const ChatBox = () => {
         header
       </div>
       <div id="message-box" className="chat-messages overflow-auto px-5 ">
-        {newMessages.map((message) => (
+        {channelMessages.map((message) => (
           <div key={message.id}>{message.body}</div>
         ))}
       </div>
       <div className="mt-auto px-5 py-3">
-        <MessageForm channel={channel} />
+        <MessageForm channel={currentChannel} />
       </div>
     </div>
   );
