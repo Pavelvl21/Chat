@@ -1,14 +1,18 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 
-import useAuth from '../hooks/index.js';
+import useHook from '../hooks/index.js';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import ChannelsBox from './ChannelsBox.jsx';
+import ChatBox from './ChatBox.jsx';
 
 const ChatPage = () => {
+  const { useAuth } = useHook;
   const auth = useAuth();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,12 +20,15 @@ const ChatPage = () => {
         const res = await axios.get('/api/v1/data', { headers: auth.getAuthHeader() });
         dispatch(channelsActions.setInitialState(res.data));
       } catch (error) {
-        console.error(error.message);
+        console.error(error.response);
+        if (error.response?.status === 401) {
+          navigate('/login');
+        }
       }
     };
 
     fetchData();
-  }, [dispatch, auth]);
+  }, [dispatch, auth, navigate]);
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -30,7 +37,7 @@ const ChatPage = () => {
           <ChannelsBox />
         </div>
         <div className="col p-0 h-100">
-          chatBox
+          <ChatBox />
         </div>
       </div>
     </div>

@@ -14,9 +14,10 @@ import AuthProvider from './AuthProvider.jsx';
 
 import '../assets/app.scss';
 
-import useAuth from '../hooks/index.js';
+import useHook from '../hooks/index.js';
 
 const PrivateOutlet = () => {
+  const { useAuth } = useHook;
   const auth = useAuth();
   return auth.user ? <Outlet /> : <Navigate to="/login" />;
 };

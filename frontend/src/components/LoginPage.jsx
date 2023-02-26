@@ -6,7 +6,7 @@ import { Formik, Form as FormikForm, useField } from 'formik';
 // import * as Yup from 'yup';
 import logo from '../assets/LoginPage.png';
 
-import useAuth from '../hooks/index.js';
+import useHook from '../hooks/index.js';
 
 const TextInput = ({ label, validationClass, ...props }) => {
   const [field, meta] = useField(props);
@@ -24,6 +24,7 @@ const TextInput = ({ label, validationClass, ...props }) => {
 const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { useAuth } = useHook;
   const auth = useAuth();
   const [authFailed, setAuthFailed] = useState('');
   return (
