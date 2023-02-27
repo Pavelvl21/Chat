@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { PlusSquare } from 'react-bootstrap-icons';
 import { actions } from '../slices/index.js';
 
 const Channel = (props) => {
@@ -32,17 +33,35 @@ const ChannelsBox = () => {
   const handleChooseChannel = (channelId) => () => {
     dispatch(actions.setCurrentChannel({ channelId }));
   };
+  const handleAddChannel = () => {
+    dispatch(actions.openModal());
+  };
+
   return (
-    <ul className="nav flex-column nav-pills nav-fill px-2">
-      {channels.map((channel) => (
-        <Channel
-          key={channel.id}
-          channel={channel}
-          isCurrent={channel.id === currentChannelId}
-          handleChooseChannel={handleChooseChannel(channel.id)}
-        />
-      ))}
-    </ul>
+    <>
+      <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
+        <b>Каналы</b>
+        <Button
+          type="button"
+          variant="group-vertical"
+          className="p-0 text-primary"
+          onClick={handleAddChannel}
+        >
+          <PlusSquare size={20} />
+          <span className="visually-hidden">+</span>
+        </Button>
+      </div>
+      <ul className="nav flex-column nav-pills nav-fill px-2">
+        {channels.map((channel) => (
+          <Channel
+            key={channel.id}
+            channel={channel}
+            isCurrent={channel.id === currentChannelId}
+            handleChooseChannel={handleChooseChannel(channel.id)}
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 
