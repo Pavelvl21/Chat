@@ -2,7 +2,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-// BEGIN (write your solution here)
 const initialState = {
   channels: [],
   currentChannelId: null,
@@ -26,4 +25,3 @@ const commentsSlice = createSlice({
 
 export const { actions } = commentsSlice;
 export default commentsSlice.reducer;
-// END

@@ -2,7 +2,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-// BEGIN (write your solution here)
 const initialState = {
   messages: [],
 };
@@ -19,4 +18,3 @@ const messagesSLice = createSlice({
 
 export const { actions } = messagesSLice;
 export default messagesSLice.reducer;
-// END
