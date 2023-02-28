@@ -29,7 +29,6 @@ const MessageForm = ({ channel }) => {
       await api.sendMessage(message);
       formik.setSubmitting(false);
       formik.resetForm();
-      formik.setSubmitting(false);
     },
   });
 
