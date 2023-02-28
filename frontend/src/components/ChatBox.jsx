@@ -64,7 +64,7 @@ const ChatBox = () => {
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
-        To exit the application, clear the localstorage in devtools.
+        chat info
       </div>
       <div id="message-box" className="chat-messages overflow-auto px-5 ">
         {channelMessages.map(({ id, username, body }) => (
