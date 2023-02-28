@@ -11,13 +11,12 @@ import LoginPage from './LoginPage.jsx';
 import ChatPage from './ChatPage.jsx';
 import Navbar from './Navbar';
 import AuthProvider from './AuthProvider.jsx';
-
 import '../assets/app.scss';
-
 import useHook from '../hooks/index.js';
 
+const { useAuth } = useHook;
+
 const PrivateOutlet = () => {
-  const { useAuth } = useHook;
   const auth = useAuth();
   return auth.user ? <Outlet /> : <Navigate to="/login" />;
 };
