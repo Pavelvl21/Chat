@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Modal as BtsModal, Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -9,13 +9,16 @@ import useHook from '../hooks/index.js';
 const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
-const Modal = () => {
+const AddModal = ({ handleClose }) => {
   const dispatch = useDispatch();
-  const { isOpened } = useSelector((state) => state.modal);
   const channels = useSelector(getChannelsNames);
-  const handleClose = () => dispatch(actions.closeModal());
   const { useApi } = useHook;
   const api = useApi();
+
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current?.focus();
+  });
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -39,14 +42,12 @@ const Modal = () => {
         handleClose();
       } catch (error) {
         console.error(error);
-        formik.setSubmitting(false);
-        formik.resetForm();
       }
     },
   });
 
   return (
-    <BtsModal show={isOpened} onHide={handleClose} centered>
+    <>
       <BtsModal.Header closeButton>
         <BtsModal.Title>Добавить канал</BtsModal.Title>
       </BtsModal.Header>
@@ -54,7 +55,9 @@ const Modal = () => {
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
+              required
               className="mb-2"
+              ref={inputRef}
               disabled={formik.isSubmitting}
               onChange={formik.handleChange}
               value={formik.values.name}
@@ -82,6 +85,18 @@ const Modal = () => {
           </Form.Group>
         </Form>
       </BtsModal.Body>
+    </>
+  );
+};
+
+const Modal = () => {
+  const dispatch = useDispatch();
+  const handleClose = () => dispatch(actions.closeModal());
+  const { isOpened } = useSelector((state) => state.modal);
+
+  return (
+    <BtsModal show={isOpened} onHide={handleClose} centered>
+      <AddModal handleClose={handleClose} />
     </BtsModal>
   );
 };
