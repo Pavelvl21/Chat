@@ -6,13 +6,14 @@ import * as yup from 'yup';
 import { actions } from '../slices/index.js';
 import useHook from '../hooks/index.js';
 
+const { useApi } = useHook;
+
 const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
 const AddModal = ({ handleClose }) => {
   const dispatch = useDispatch();
   const channels = useSelector(getChannelsNames);
-  const { useApi } = useHook;
   const api = useApi();
 
   const inputRef = useRef();

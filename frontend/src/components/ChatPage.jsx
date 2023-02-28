@@ -9,8 +9,9 @@ import ChannelsBox from './ChannelsBox.jsx';
 import ChatBox from './ChatBox.jsx';
 import Modal from './Modal.jsx';
 
+const { useAuth } = useHook;
+
 const ChatPage = () => {
-  const { useAuth } = useHook;
   const auth = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -8,6 +8,8 @@ import logo from '../assets/LoginPage.png';
 
 import useHook from '../hooks/index.js';
 
+const { useAuth } = useHook;
+
 const TextInput = ({ label, validationClass, ...props }) => {
   const [field, meta] = useField(props);
   return (
@@ -24,7 +26,6 @@ const TextInput = ({ label, validationClass, ...props }) => {
 const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { useAuth } = useHook;
   const auth = useAuth();
   const [authFailed, setAuthFailed] = useState('');
   return (

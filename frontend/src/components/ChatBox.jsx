@@ -5,8 +5,9 @@ import { Button, Form, InputGroup } from 'react-bootstrap';
 import * as yup from 'yup';
 import useHook from '../hooks/index.js';
 
+const { useApi, useAuth } = useHook;
+
 const MessageForm = ({ channel }) => {
-  const { useApi, useAuth } = useHook;
   const api = useApi();
   const { user: { username } } = useAuth();
   const validateSchema = yup.object().shape({
