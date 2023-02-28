@@ -20,6 +20,10 @@ const commentsSlice = createSlice({
       const { channelId } = payload;
       state.currentChannelId = channelId;
     },
+    addChannel(state, { payload }) {
+      const { channel } = payload;
+      state.channels.push(channel);
+    },
   },
 });
 
