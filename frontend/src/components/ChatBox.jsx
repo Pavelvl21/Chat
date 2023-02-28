@@ -6,8 +6,9 @@ import * as yup from 'yup';
 import useHook from '../hooks/index.js';
 
 const MessageForm = ({ channel }) => {
-  const { useApi } = useHook;
+  const { useApi, useAuth } = useHook;
   const api = useApi();
+  const { user: { username } } = useAuth();
   const validateSchema = yup.object().shape({
     body: yup
       .string()
@@ -24,7 +25,7 @@ const MessageForm = ({ channel }) => {
       const message = {
         body,
         channelId: channel.id,
-        userName: 'admin',
+        username,
       };
       await api.sendMessage(message);
       formik.setSubmitting(false);
@@ -65,8 +66,12 @@ const ChatBox = () => {
         To exit the application, clear the localstorage in devtools.
       </div>
       <div id="message-box" className="chat-messages overflow-auto px-5 ">
-        {channelMessages.map((message) => (
-          <div key={message.id}>{message.body}</div>
+        {channelMessages.map(({ id, username, body }) => (
+          <div key={id} className="text-break mb-2">
+            <b>{username}</b>
+            {': '}
+            {body}
+          </div>
         ))}
       </div>
       <div className="mt-auto px-5 py-3">
