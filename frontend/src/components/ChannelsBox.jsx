@@ -51,7 +51,7 @@ const ChannelsBox = () => {
           <span className="visually-hidden">+</span>
         </Button>
       </div>
-      <ul className="nav flex-column nav-pills nav-fill px-2">
+      <ul className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
         {channels.map((channel) => (
           <Channel
             key={channel.id}
