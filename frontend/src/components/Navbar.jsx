@@ -1,12 +1,19 @@
-import { Navbar as BtsNavbar, Container } from 'react-bootstrap';
+import { Navbar as BtsNavbar, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import useHook from '../hooks/index.js';
 
-const Navbar = () => (
-  <BtsNavbar bg="white" expand="lg" className="shadow-sm">
-    <Container>
-      <BtsNavbar.Brand as={Link} to="/login">Live Chat</BtsNavbar.Brand>
-    </Container>
-  </BtsNavbar>
-);
+const { useAuth } = useHook;
+const Navbar = () => {
+  const { logOut, user } = useAuth();
+
+  return (
+    <BtsNavbar bg="white" expand="lg" className="shadow-sm">
+      <Container>
+        <BtsNavbar.Brand as={Link} to="/login">Live Chat</BtsNavbar.Brand>
+        {!!user && <Button onClick={logOut}>Выйти</Button>}
+      </Container>
+    </BtsNavbar>
+  );
+};
 
 export default Navbar;
