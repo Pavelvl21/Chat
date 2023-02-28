@@ -6,15 +6,30 @@ import contexts from './contexts/index.js';
 
 const init = async (socket) => {
   const { ApiContext } = contexts;
-  const Api = {
+
+  const api = {
     sendMessage: (...args) => socket.emit('newMessage', ...args),
+    createChannel: (...args) => new Promise((resolve, reject) => {
+      socket.timeout(3000).emit('newChannel', ...args, (error, response) => {
+        const { data } = response;
+        if (error) {
+          console.error(error);
+          reject();
+        }
+        resolve(data);
+      });
+    }),
   };
+
   socket.on('newMessage', (payload) => {
     store.dispatch(actions.addMessage({ message: payload }));
   });
+  socket.on('newChannel', (payload) => {
+    store.dispatch(actions.addChannel({ channel: payload }));
+  });
   return (
     <Provider store={store}>
-      <ApiContext.Provider value={Api}>
+      <ApiContext.Provider value={api}>
         <App />
       </ApiContext.Provider>
     </Provider>
