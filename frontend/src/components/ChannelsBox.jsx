@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { PlusSquare } from 'react-bootstrap-icons';
 import { actions } from '../slices/index.js';
 
@@ -13,16 +13,39 @@ const Channel = (props) => {
   const variant = isCurrent ? 'secondary' : null;
   return (
     <li key={channel.id} className="nav-item w-100">
-      <Button
-        type="button"
-        variant={variant}
-        key={channel.id}
-        className="w-100 rounded-0 text-start"
-        onClick={handleChooseChannel}
-      >
-        <span className="me-1">#</span>
-        {channel.name}
-      </Button>
+      {channel.removable
+        ? (
+          <Dropdown as={ButtonGroup} className="d-flex">
+            <Button
+              type="button"
+              variant={variant}
+              key={channel.id}
+              className="w-100 rounded-0 text-start"
+              onClick={handleChooseChannel}
+            >
+              <span className="me-1">#</span>
+              {channel.name}
+            </Button>
+            <Dropdown.Toggle split variant={variant} id="dropdown-split-basic" />
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        )
+        : (
+          <Button
+            type="button"
+            variant={variant}
+            key={channel.id}
+            className="w-100 rounded-0 text-start"
+            onClick={handleChooseChannel}
+          >
+            <span className="me-1">#</span>
+            {channel.name}
+          </Button>
+        )}
     </li>
   );
 };
