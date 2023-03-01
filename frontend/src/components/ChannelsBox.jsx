@@ -9,6 +9,8 @@ const Channel = (props) => {
     channel,
     isCurrent,
     handleChooseChannel,
+    handleRemoveChannel,
+    handleRenameChannel,
   } = props;
   const variant = isCurrent ? 'secondary' : null;
   return (
@@ -26,11 +28,12 @@ const Channel = (props) => {
               <span className="me-1">#</span>
               {channel.name}
             </Button>
-            <Dropdown.Toggle split variant={variant} id="dropdown-split-basic" />
+            <Dropdown.Toggle split variant={variant} className="flex-grow-0">
+              <span className="visually-hidden">Управление каналом</span>
+            </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              <Dropdown.Item onClick={handleRemoveChannel}>Удалить</Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameChannel}>Переименовать</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
@@ -54,10 +57,19 @@ const ChannelsBox = () => {
   const dispatch = useDispatch();
   const { channels, currentChannelId } = useSelector((state) => state.channelsData);
   const handleChooseChannel = (channelId) => () => {
+    console.log('handleChooseChannel');
     dispatch(actions.setCurrentChannel({ channelId }));
   };
   const handleAddChannel = () => {
+    console.log('handleAddChannel');
     dispatch(actions.openModal());
+  };
+  const handleRemoveChannel = (channelId) => () => {
+    console.log('right metod!');
+    dispatch(actions.removeChannel({ channelId }));
+  };
+  const handleRenameChannel = (channelId) => () => {
+    dispatch(actions.renameChannel({ channelId }));
   };
 
   return (
@@ -81,6 +93,8 @@ const ChannelsBox = () => {
             channel={channel}
             isCurrent={channel.id === currentChannelId}
             handleChooseChannel={handleChooseChannel(channel.id)}
+            handleRemoveChannel={handleRemoveChannel(channel.id)}
+            handleRenameChannel={handleRenameChannel(channel.id)}
           />
         ))}
       </ul>
