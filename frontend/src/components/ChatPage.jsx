@@ -7,7 +7,7 @@ import useHook from '../hooks/index.js';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import ChannelsBox from './ChannelsBox.jsx';
 import ChatBox from './ChatBox.jsx';
-import Modal from './Modal.jsx';
+import Modal from './Modals/Modal.jsx';
 
 const { useAuth } = useHook;
 
