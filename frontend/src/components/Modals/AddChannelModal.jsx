@@ -3,15 +3,15 @@ import { Modal as BtsModal, Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { actions } from '../slices/index.js';
-import useHook from '../hooks/index.js';
+import { actions } from '../../slices/index.js';
+import useHook from '../../hooks/index.js';
 
 const { useApi } = useHook;
 
 const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
-const AddModal = ({ handleClose }) => {
+const AddChannelModal = ({ handleClose }) => {
   const dispatch = useDispatch();
   const channels = useSelector(getChannelsNames);
   const api = useApi();
@@ -90,16 +90,4 @@ const AddModal = ({ handleClose }) => {
   );
 };
 
-const Modal = () => {
-  const dispatch = useDispatch();
-  const handleClose = () => dispatch(actions.closeModal());
-  const { isOpened } = useSelector((state) => state.modal);
-
-  return (
-    <BtsModal show={isOpened} onHide={handleClose} centered>
-      <AddModal handleClose={handleClose} />
-    </BtsModal>
-  );
-};
-
-export default Modal;
+export default AddChannelModal;
