@@ -23,7 +23,7 @@ const Channel = (props) => {
               variant={variant}
               key={channel.id}
               className="w-100 rounded-0 text-start"
-              onClick={handleChooseChannel}
+              onClick={handleChooseChannel(channel.id)}
             >
               <span className="me-1">#</span>
               {channel.name}
@@ -32,8 +32,8 @@ const Channel = (props) => {
               <span className="visually-hidden">Управление каналом</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={handleRemoveChannel}>Удалить</Dropdown.Item>
-              <Dropdown.Item onClick={handleRenameChannel}>Переименовать</Dropdown.Item>
+              <Dropdown.Item onClick={handleRemoveChannel(channel.id)}>Удалить</Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameChannel(channel.id)}>Переименовать</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
@@ -43,7 +43,7 @@ const Channel = (props) => {
             variant={variant}
             key={channel.id}
             className="w-100 rounded-0 text-start"
-            onClick={handleChooseChannel}
+            onClick={handleChooseChannel(channel.id)}
           >
             <span className="me-1">#</span>
             {channel.name}
@@ -57,16 +57,13 @@ const ChannelsBox = () => {
   const dispatch = useDispatch();
   const { channels, currentChannelId } = useSelector((state) => state.channelsData);
   const handleChooseChannel = (channelId) => () => {
-    console.log('handleChooseChannel');
     dispatch(actions.setCurrentChannel({ channelId }));
   };
   const handleAddChannel = () => {
-    console.log('handleAddChannel');
-    dispatch(actions.openModal());
+    dispatch(actions.openModal({ modalType: 'addChannel' }));
   };
   const handleRemoveChannel = (channelId) => () => {
-    console.log('right metod!');
-    dispatch(actions.removeChannel({ channelId }));
+    dispatch(actions.openModal({ modalType: 'removeChannel', id: channelId }));
   };
   const handleRenameChannel = (channelId) => () => {
     dispatch(actions.renameChannel({ channelId }));
@@ -92,9 +89,9 @@ const ChannelsBox = () => {
             key={channel.id}
             channel={channel}
             isCurrent={channel.id === currentChannelId}
-            handleChooseChannel={handleChooseChannel(channel.id)}
-            handleRemoveChannel={handleRemoveChannel(channel.id)}
-            handleRenameChannel={handleRenameChannel(channel.id)}
+            handleChooseChannel={handleChooseChannel}
+            handleRemoveChannel={handleRemoveChannel}
+            handleRenameChannel={handleRenameChannel}
           />
         ))}
       </ul>
