@@ -19,6 +19,7 @@ const init = async (socket) => {
         resolve(data);
       });
     }),
+    removeChannel: (...args) => socket.emit('removeChannel', ...args),
   };
 
   socket.on('newMessage', (payload) => {
@@ -26,6 +27,9 @@ const init = async (socket) => {
   });
   socket.on('newChannel', (payload) => {
     store.dispatch(actions.addChannel({ channel: payload }));
+  });
+  socket.on('removeChannel', (payload) => {
+    store.dispatch(actions.removeChannel({ channelId: payload.id }));
   });
   return (
     <Provider store={store}>
