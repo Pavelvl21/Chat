@@ -22,7 +22,7 @@ const Channel = (props) => {
               type="button"
               variant={variant}
               key={channel.id}
-              className="w-100 rounded-0 text-start"
+              className="w-100 rounded-0 text-start text-truncate"
               onClick={handleChooseChannel(channel.id)}
             >
               <span className="me-1">#</span>
@@ -42,7 +42,7 @@ const Channel = (props) => {
             type="button"
             variant={variant}
             key={channel.id}
-            className="w-100 rounded-0 text-start"
+            className="w-100 rounded-0 text-start text-truncate"
             onClick={handleChooseChannel(channel.id)}
           >
             <span className="me-1">#</span>
