@@ -66,7 +66,7 @@ const ChannelsBox = () => {
     dispatch(actions.openModal({ modalType: 'removeChannel', id: channelId }));
   };
   const handleRenameChannel = (channelId) => () => {
-    dispatch(actions.renameChannel({ channelId }));
+    dispatch(actions.openModal({ modalType: 'renameChannel', id: channelId }));
   };
 
   return (

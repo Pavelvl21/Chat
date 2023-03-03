@@ -20,6 +20,7 @@ const init = async (socket) => {
       });
     }),
     removeChannel: (...args) => socket.emit('removeChannel', ...args),
+    renameChannel: (...args) => socket.emit('renameChannel', ...args),
   };
 
   socket.on('newMessage', (payload) => {
@@ -30,6 +31,10 @@ const init = async (socket) => {
   });
   socket.on('removeChannel', (payload) => {
     store.dispatch(actions.removeChannel({ channelId: payload.id }));
+  });
+  socket.on('renameChannel', (payload) => {
+    const { id, name } = payload;
+    store.dispatch(actions.renameChannel({ channelId: id, channelName: name }));
   });
   return (
     <Provider store={store}>

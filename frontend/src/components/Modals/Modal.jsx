@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal as BtsModal } from 'react-bootstrap';
 import { actions } from '../../slices/index.js';
-import AddChannelModal from './AddChannelModal';
-import RemoveChannelModal from './RemoveChannelModal';
+import AddChannelModal from './AddChannelModal.jsx';
+import RemoveChannelModal from './RemoveChannelModal.jsx';
+import RenameChannelModal from './RenameChannelModal.jsx';
 
 const mapping = {
   addChannel: AddChannelModal,
   removeChannel: RemoveChannelModal,
+  renameChannel: RenameChannelModal,
 };
 
 const Modal = () => {
