@@ -16,7 +16,7 @@ const AddChannelModal = ({ handleClose }) => {
   const channels = useSelector(getChannelsNames);
   const api = useApi();
 
-  const inputRef = useRef();
+  const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current?.focus();
   });
