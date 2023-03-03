@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice } from '@reduxjs/toolkit';
+import remove from 'lodash/remove.js';
 import { actions as channeslAtions } from './channelsSlice.js';
 
 const initialState = {
@@ -16,10 +17,15 @@ const messagesSLice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(channeslAtions.setInitialState, (state, { payload }) => {
-      const { messages } = payload;
-      state.messages = messages;
-    });
+    builder
+      .addCase(channeslAtions.setInitialState, (state, { payload }) => {
+        const { messages } = payload;
+        state.messages = messages;
+      })
+      .addCase(channeslAtions.removeChannel, (state, { payload }) => {
+        const { channelId } = payload;
+        remove(state.messages, (message) => message.channelId === channelId);
+      });
   },
 });
 
