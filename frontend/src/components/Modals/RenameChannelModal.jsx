@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Modal as BtsModal, Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -10,6 +11,10 @@ const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
 const RenameChannelModal = ({ handleClose }) => {
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current?.select();
+  });
   const channelsNames = useSelector(getChannelsNames);
   const channelId = useSelector(({ modal }) => modal.id);
   const channel = useSelector(({ channelsData: { channels } }) => channels
@@ -50,6 +55,7 @@ const RenameChannelModal = ({ handleClose }) => {
           <Form.Group>
             <Form.Control
               required
+              ref={inputRef}
               className="mb-2"
               onChange={formik.handleChange}
               value={formik.values.name}
