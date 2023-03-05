@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { Modal as BtsModal, Button, Form } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { Modal as BtsModal, Form, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { actions } from '../../slices/index.js';
 import useHook from '../../hooks/index.js';
 
 const { useApi } = useHook;
@@ -11,35 +10,34 @@ const { useApi } = useHook;
 const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
-const AddChannelModal = ({ handleClose }) => {
-  const dispatch = useDispatch();
-  const channels = useSelector(getChannelsNames);
-  const api = useApi();
-
+const RenameChannelModal = ({ handleClose }) => {
   const inputRef = useRef(null);
   useEffect(() => {
-    inputRef.current.focus();
-  });
+    inputRef.current.select();
+  }, []);
+  const channelsNames = useSelector(getChannelsNames);
+  const channelId = useSelector(({ modal }) => modal.id);
+  const channel = useSelector(({ channelsData: { channels } }) => channels
+    .find(({ id }) => channelId === id));
+  const api = useApi();
 
   const validationSchema = yup.object().shape({
     name: yup
       .string()
       .trim()
       .matches(/^[a-z0-9_-]{3,16}$/)
-      .notOneOf(channels)
+      .notOneOf(channelsNames)
       .required('Required filed'),
   });
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: channel.name,
     },
     validationSchema,
     onSubmit: async ({ name }) => {
-      const channel = { name };
       try {
-        const data = await api.createChannel(channel);
-        dispatch(actions.setCurrentChannel({ channelId: data.id }));
+        await api.renameChannel({ name, id: channelId });
         handleClose();
       } catch (error) {
         console.error(error);
@@ -50,15 +48,15 @@ const AddChannelModal = ({ handleClose }) => {
   return (
     <>
       <BtsModal.Header closeButton>
-        <BtsModal.Title>Добавить канал</BtsModal.Title>
+        <BtsModal.Title>Переимновать канал</BtsModal.Title>
       </BtsModal.Header>
       <BtsModal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
-              className="mb-2"
+              required
               ref={inputRef}
-              disabled={formik.isSubmitting}
+              className="mb-2"
               onChange={formik.handleChange}
               value={formik.values.name}
               name="name"
@@ -77,7 +75,6 @@ const AddChannelModal = ({ handleClose }) => {
               <Button
                 variant="primary"
                 type="submit"
-                disabled={formik.isSubmitting}
               >
                 Отправить
               </Button>
@@ -89,4 +86,4 @@ const AddChannelModal = ({ handleClose }) => {
   );
 };
 
-export default AddChannelModal;
+export default RenameChannelModal;

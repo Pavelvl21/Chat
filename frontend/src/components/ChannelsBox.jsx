@@ -33,7 +33,7 @@ const Channel = (props) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleRemoveChannel(channel.id)}>Удалить</Dropdown.Item>
-              <Dropdown.Item onClick={handleRenameChannel()}>Переименовать</Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameChannel(channel.id)}>Переименовать</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
@@ -65,8 +65,8 @@ const ChannelsBox = () => {
   const handleRemoveChannel = (channelId) => () => {
     dispatch(actions.openModal({ modalType: 'removeChannel', id: channelId }));
   };
-  const handleRenameChannel = () => {
-    dispatch(actions.openModal({ modalType: 'addChannel' }));
+  const handleRenameChannel = (channelId) => () => {
+    dispatch(actions.openModal({ modalType: 'renameChannel', id: channelId }));
   };
 
   return (

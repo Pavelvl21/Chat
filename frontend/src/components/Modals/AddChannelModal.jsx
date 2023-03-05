@@ -18,7 +18,7 @@ const AddChannelModal = ({ handleClose }) => {
 
   const inputRef = useRef(null);
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   });
 
   const validationSchema = yup.object().shape({
@@ -56,6 +56,7 @@ const AddChannelModal = ({ handleClose }) => {
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
+              required
               className="mb-2"
               ref={inputRef}
               disabled={formik.isSubmitting}
