@@ -33,7 +33,7 @@ const Channel = (props) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleRemoveChannel(channel.id)}>Удалить</Dropdown.Item>
-              <Dropdown.Item onClick={handleRenameChannel(channel.id)}>Переименовать</Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameChannel()}>Переименовать</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
