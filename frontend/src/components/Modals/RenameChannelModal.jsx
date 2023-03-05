@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { Modal as BtsModal, Form, Button } from 'react-bootstrap';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import useHook from '../../hooks/index.js';
 
 const { useApi } = useHook;
 
-const getChannelsNames = ({ channelsData: { channels } }) => channels
-  .map(({ name }) => name);
+// const getChannelsNames = ({ channelsData: { channels } }) => channels
+//   .map(({ name }) => name);
 
 const RenameChannelModal = ({ handleClose }) => {
   const inputRef = useRef();
@@ -17,7 +17,7 @@ const RenameChannelModal = ({ handleClose }) => {
     inputRef.current.select();
   }, []);
   // const channelsNames = useSelector(getChannelsNames);
-  // const channelId = useSelector(({ modal }) => modal.id);
+  const channelId = useSelector(({ modal }) => modal.id);
   // const channel = useSelector(({ channelsData: { channels } }) => channels
   //   .find(({ id }) => channelId === id));
   const api = useApi();
@@ -27,7 +27,7 @@ const RenameChannelModal = ({ handleClose }) => {
       .string()
       .trim()
       .matches(/^[a-z0-9_-]{3,16}$/)
-      .notOneOf(channelsNames)
+      // .notOneOf(channelsNames)
       .required('Required filed'),
   });
 
