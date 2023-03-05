@@ -54,7 +54,6 @@ const RenameChannelModal = ({ handleClose }) => {
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
-              required
               ref={inputRef}
               className="mb-2"
               onChange={formik.handleChange}
