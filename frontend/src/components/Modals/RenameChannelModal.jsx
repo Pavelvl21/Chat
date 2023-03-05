@@ -13,7 +13,7 @@ const getChannelsNames = ({ channelsData: { channels } }) => channels
 const RenameChannelModal = ({ handleClose }) => {
   const inputRef = useRef();
   useEffect(() => {
-    setTimeout(() => inputRef.select());
+    setTimeout(() => inputRef.current.select());
   }, []);
   const channelsNames = useSelector(getChannelsNames);
   const channelId = useSelector(({ modal }) => modal.id);
