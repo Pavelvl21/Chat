@@ -1,33 +1,32 @@
-import { useEffect, useRef } from 'react';
-import { Modal as BtsModal, Form, Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { Modal as BtsModal, Button, Form } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { actions } from '../../slices/index.js';
 import useHook from '../../hooks/index.js';
 
 const { useApi } = useHook;
 
-// const getChannelsNames = ({ channelsData: { channels } }) => channels
-//   .map(({ name }) => name);
+const getChannelsNames = ({ channelsData: { channels } }) => channels
+  .map(({ name }) => name);
 
-const RenameChannelModal = ({ handleClose }) => {
-  const inputRef = useRef();
-  useEffect(() => {
-    inputRef.current.focus();
-    inputRef.current.select();
-  }, []);
-  // const channelsNames = useSelector(getChannelsNames);
-  const channelId = useSelector(({ modal }) => modal.id);
-  // const channel = useSelector(({ channelsData: { channels } }) => channels
-  //   .find(({ id }) => channelId === id));
+const AddChannelModal = ({ handleClose }) => {
+  const dispatch = useDispatch();
+  const channels = useSelector(getChannelsNames);
   const api = useApi();
+
+  const inputRef = useRef(null);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const validationSchema = yup.object().shape({
     name: yup
       .string()
       .trim()
       .matches(/^[a-z0-9_-]{3,16}$/)
-      // .notOneOf(channelsNames)
+      .notOneOf(channels)
       .required('Required filed'),
   });
 
@@ -37,8 +36,10 @@ const RenameChannelModal = ({ handleClose }) => {
     },
     validationSchema,
     onSubmit: async ({ name }) => {
+      const channel = { name };
       try {
-        await api.renameChannel({ name, id: channelId });
+        const data = await api.createChannel(channel);
+        dispatch(actions.setCurrentChannel({ channelId: data.id }));
         handleClose();
       } catch (error) {
         console.error(error);
@@ -49,14 +50,15 @@ const RenameChannelModal = ({ handleClose }) => {
   return (
     <>
       <BtsModal.Header closeButton>
-        <BtsModal.Title>Переимновать канал</BtsModal.Title>
+        <BtsModal.Title>Добавить канал</BtsModal.Title>
       </BtsModal.Header>
       <BtsModal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
-              ref={inputRef}
               className="mb-2"
+              ref={inputRef}
+              disabled={formik.isSubmitting}
               onChange={formik.handleChange}
               value={formik.values.name}
               name="name"
@@ -75,6 +77,7 @@ const RenameChannelModal = ({ handleClose }) => {
               <Button
                 variant="primary"
                 type="submit"
+                disabled={formik.isSubmitting}
               >
                 Отправить
               </Button>
@@ -86,4 +89,4 @@ const RenameChannelModal = ({ handleClose }) => {
   );
 };
 
-export default RenameChannelModal;
+export default AddChannelModal;
