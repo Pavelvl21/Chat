@@ -16,9 +16,9 @@ const AddChannelModal = ({ handleClose }) => {
   const channels = useSelector(getChannelsNames);
   const api = useApi();
 
-  const inputRef = useRef(null);
+  const inputRef = useRef();
   useEffect(() => {
-    inputRef.current?.focus();
+    inputRef.current.focus();
   });
 
   const validationSchema = yup.object().shape({

@@ -11,7 +11,7 @@ const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
 const RenameChannelModal = ({ handleClose }) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
   });
