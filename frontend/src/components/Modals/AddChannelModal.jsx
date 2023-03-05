@@ -18,8 +18,8 @@ const AddChannelModal = ({ handleClose }) => {
 
   const inputRef = useRef();
   useEffect(() => {
-    inputRef.current.focus();
-  }, [inputRef]);
+    inputRef.current?.focus();
+  }, []);
 
   const validationSchema = yup.object().shape({
     name: yup
