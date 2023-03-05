@@ -43,8 +43,6 @@ const RenameChannelModal = ({ handleClose }) => {
         console.error(error);
       }
     },
-    validateOnBlur: false,
-    validateOnChange: false,
   });
 
   return (
