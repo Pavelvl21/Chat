@@ -13,8 +13,8 @@ const getChannelsNames = ({ channelsData: { channels } }) => channels
 const RenameChannelModal = ({ handleClose }) => {
   const inputRef = useRef();
   useEffect(() => {
-    inputRef.current?.focus();
-    inputRef.current?.select();
+    inputRef.current.focus();
+    inputRef.current.select();
   }, []);
   const channelsNames = useSelector(getChannelsNames);
   const channelId = useSelector(({ modal }) => modal.id);
@@ -33,7 +33,7 @@ const RenameChannelModal = ({ handleClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: channel.name,
+      name: '',
     },
     validationSchema,
     onSubmit: async ({ name }) => {
