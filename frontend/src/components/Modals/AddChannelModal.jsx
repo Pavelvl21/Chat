@@ -56,7 +56,6 @@ const AddChannelModal = ({ handleClose }) => {
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Control
-              required
               className="mb-2"
               ref={inputRef}
               disabled={formik.isSubmitting}
