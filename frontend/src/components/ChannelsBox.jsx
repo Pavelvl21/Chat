@@ -10,7 +10,7 @@ const Channel = (props) => {
     isCurrent,
     handleChooseChannel,
     handleRemoveChannel,
-    // handleRenameChannel,
+    handleRenameChannel,
   } = props;
   const variant = isCurrent ? 'secondary' : null;
   return (
@@ -33,7 +33,7 @@ const Channel = (props) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleRemoveChannel(channel.id)}>Удалить</Dropdown.Item>
-              <Dropdown.Item onClick={handleAddChannel()}>Переименовать</Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameChannel(channel.id)}>Переименовать</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
