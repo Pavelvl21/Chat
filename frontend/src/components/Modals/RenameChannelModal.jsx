@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Modal as BtsModal, Form, Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import useHook from '../../hooks/index.js';
@@ -16,10 +16,10 @@ const RenameChannelModal = ({ handleClose }) => {
     inputRef.current.focus();
     inputRef.current.select();
   }, []);
-  const channelsNames = useSelector(getChannelsNames);
-  const channelId = useSelector(({ modal }) => modal.id);
-  const channel = useSelector(({ channelsData: { channels } }) => channels
-    .find(({ id }) => channelId === id));
+  // const channelsNames = useSelector(getChannelsNames);
+  // const channelId = useSelector(({ modal }) => modal.id);
+  // const channel = useSelector(({ channelsData: { channels } }) => channels
+  //   .find(({ id }) => channelId === id));
   const api = useApi();
 
   const validationSchema = yup.object().shape({
