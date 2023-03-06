@@ -79,13 +79,13 @@ const LoginPage = () => {
                   </div>
                   <button type="submit" className="btn btn-outline-primary w-100 mt-2 mb-3">Войти</button>
                 </FormikForm>
-                <h3>Project not completed. You can log in with admin login with same password.</h3>
+                <h3>Project not completed</h3>
               </div>
               <div className="card-footer p-4">
                 <div className="text-center">
                   <span>Нет аккаунта?</span>
                   {' '}
-                  <Link to="/login">Регистрация</Link>
+                  <Link to="/signup">Регистрация</Link>
                 </div>
               </div>
             </div>
