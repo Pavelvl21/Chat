@@ -9,8 +9,9 @@ import {
 import NotFoundPage from './NotFoundPage.jsx';
 import LoginPage from './LoginPage.jsx';
 import ChatPage from './ChatPage.jsx';
-import Navbar from './Navbar';
+import Navbar from './Navbar.jsx';
 import AuthProvider from './AuthProvider.jsx';
+import SignupPage from './SignupPage.jsx';
 import '../assets/app.scss';
 import useHook from '../hooks/index.js';
 
@@ -28,6 +29,7 @@ const App = () => (
         <Navbar />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="/" element={<PrivateOutlet />}>
             <Route path="" element={<ChatPage />} />
           </Route>
