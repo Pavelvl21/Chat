@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <BtsNavbar bg="white" expand="lg" className="shadow-sm">
       <Container>
-        <BtsNavbar.Brand as={Link} to="/login">Live Chat</BtsNavbar.Brand>
+        <BtsNavbar.Brand as={Link} to="/login">Hexlet Chat</BtsNavbar.Brand>
         {!!user && <Button onClick={logOut}>Выйти</Button>}
       </Container>
     </BtsNavbar>
