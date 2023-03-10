@@ -1,15 +1,18 @@
 import { Navbar as BtsNavbar, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import useHook from '../hooks/index.js';
+import routes from '../routes.js';
 
 const { useAuth } = useHook;
 const Navbar = () => {
+  const { t } = useTranslation();
   const { logOut, user } = useAuth();
 
   return (
     <BtsNavbar bg="white" expand="lg" className="shadow-sm">
       <Container>
-        <BtsNavbar.Brand as={Link} to="/login">Live Chat</BtsNavbar.Brand>
+        <BtsNavbar.Brand as={Link} to={routes.chatPagePath()}>Live Chat</BtsNavbar.Brand>
         {!!user && <Button onClick={logOut}>Выйти</Button>}
       </Container>
     </BtsNavbar>
