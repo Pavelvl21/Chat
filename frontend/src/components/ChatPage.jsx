@@ -8,12 +8,11 @@ import { actions as channelsActions } from '../slices/channelsSlice.js';
 import ChannelsBox from './ChannelsBox.jsx';
 import ChatBox from './ChatBox.jsx';
 import Modal from './Modals/Modal.jsx';
-import { useTranslation } from 'react-i18next';
+import routes from '../routes.js'
 
 const { useAuth } = useHook;
 
 const ChatPage = () => {
-  const { t } = useTranslation();
   const auth = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/api/v1/data', { headers: auth.getAuthHeader() });
+        const res = await axios.get(routes.dataApiPath(), { headers: auth.getAuthHeader() });
         dispatch(channelsActions.setInitialState(res.data));
       } catch (error) {
         console.error(error.response);
