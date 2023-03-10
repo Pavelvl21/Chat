@@ -2,13 +2,12 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-
 import useHook from '../hooks/index.js';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import ChannelsBox from './ChannelsBox.jsx';
 import ChatBox from './ChatBox.jsx';
 import Modal from './Modals/Modal.jsx';
-import routes from '../routes.js'
+import routes from '../routes.js';
 
 const { useAuth } = useHook;
 
