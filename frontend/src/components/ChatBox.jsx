@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Button, Form, InputGroup } from 'react-bootstrap';
+import { ArrowRightSquare } from 'react-bootstrap-icons';
 import * as yup from 'yup';
 import useHook from '../hooks/index.js';
 
@@ -11,6 +12,7 @@ const MessageForm = ({ channel }) => {
   const { t } = useTranslation();
   const api = useApi();
   const { user: { username } } = useAuth();
+  const inputRef = useRef();
   const validateSchema = yup.object().shape({
     body: yup
       .string()
@@ -29,11 +31,18 @@ const MessageForm = ({ channel }) => {
         channelId: channel.id,
         username,
       };
-      await api.sendMessage(message);
+      try {
+        await api.sendMessage(message);
+        formik.resetForm();
+      } catch (error) {
+        console.error(error);
+      }
       formik.setSubmitting(false);
-      formik.resetForm();
+      inputRef.current.focus();
     },
   });
+
+  const isInvalid = !formik.dirty || !formik.isValid;
 
   return (
     <Form onSubmit={formik.handleSubmit} className="py-1 border rounded-2">
@@ -46,7 +55,10 @@ const MessageForm = ({ channel }) => {
           className="border-0 p-0 ps-2"
           placeholder={t('chat.placeholder')}
         />
-        <Button type="submit">{t('chat.send')}</Button>
+        <Button type="submit" variant="group-vertical" disabled={isInvalid}>
+          <ArrowRightSquare size={20} />
+          <span className="visually-hidden">{t('chat.send')}</span>
+        </Button>
       </InputGroup>
     </Form>
   );
