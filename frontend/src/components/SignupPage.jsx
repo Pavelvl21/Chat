@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import useHook from '../hooks/index.js';
 import img from '../assets/SignupPage.png';
+import routes from '../routes.js';
 
 const { useAuth } = useHook;
 
@@ -38,11 +39,11 @@ const SignupPage = () => {
     onSubmit: async (values) => {
       try {
         const { data } = await axios.post(
-          '/api/v1/signup',
+          routes.signupApiPath(),
           { username: values.username, password: values.password },
         );
         auth.logIn(data);
-        navigate('/');
+        navigate(routes.chatPagePath());
       } catch (error) {
         console.error(error.message);
       }
