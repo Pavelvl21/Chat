@@ -1,9 +1,10 @@
-import React from 'react';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { ArrowRightSquare } from 'react-bootstrap-icons';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import useHook from '../hooks/index.js';
 
 const { useApi, useAuth } = useHook;
@@ -65,6 +66,7 @@ const MessageForm = ({ channel }) => {
 };
 
 const ChatBox = () => {
+  const { t } = useTranslation();
   const currentChannel = useSelector((state) => {
     const { channelsData: { channels, currentChannelId } } = state;
     return channels.find((channel) => channel.id === currentChannelId);
@@ -79,7 +81,14 @@ const ChatBox = () => {
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
-        chat info
+        <p className="m-0">
+          <b>
+            {`# ${currentChannel?.name}`}
+          </b>
+        </p>
+        <span className="text-muted">
+          {`${channelMessages.length} ${t('chat.messageCount', { count: channelMessages.length })}`}
+        </span>
       </div>
       <div id="message-box" className="chat-messages overflow-auto px-5 ">
         {channelMessages.map(({ id, username, body }) => (
