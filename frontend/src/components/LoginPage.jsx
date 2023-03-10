@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form as FormikForm, useField } from 'formik';
 // import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import routes from '../routes';
 import logo from '../assets/LoginPage.png';
 import useHook from '../hooks/index.js';
 
@@ -39,9 +40,9 @@ const LoginPage = () => {
       onSubmit={async (values) => {
         setAuthFailed('');
         try {
-          const { data } = await axios.post('/api/v1/login', values);
+          const { data } = await axios.post(routes.loginApiPath(), values);
           auth.logIn(data);
-          const { from } = location.state || { from: { pathname: '/' } };
+          const { from } = location.state || { from: { pathname: routes.chatPagePath() } };
           navigate(from);
         } catch (error) {
           setAuthFailed('is-invalid');
@@ -85,7 +86,7 @@ const LoginPage = () => {
                 <div className="text-center">
                   <span>{t('login.notAUser')}</span>
                   {' '}
-                  <Link to="/signup">{t('login.signup')}</Link>
+                  <Link to={routes.signupPagePath()}>{t('login.signup')}</Link>
                 </div>
               </div>
             </div>
