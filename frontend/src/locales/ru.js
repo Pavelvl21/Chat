@@ -5,6 +5,7 @@ export default {
       remove: 'Удалить',
       rename: 'Переименовать',
       channels: 'Каналы',
+      creatingChannel: '...',
     },
     chat: {
       newMessage: 'Новое сообщение',
