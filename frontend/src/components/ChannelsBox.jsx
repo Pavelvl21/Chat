@@ -12,6 +12,7 @@ const Channel = (props) => {
     handleRemoveChannel,
     handleRenameChannel,
   } = props;
+  const { t } = useTranslation();
   const variant = isCurrent ? 'secondary' : null;
   return (
     <li key={channel.id} className="nav-item w-100">
@@ -29,11 +30,11 @@ const Channel = (props) => {
               {channel.name}
             </Button>
             <Dropdown.Toggle split variant={variant} className="flex-grow-0">
-              <span className="visually-hidden">Управление каналом</span>
+              <span className="visually-hidden">{t('channels.menu')}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={handleRemoveChannel(channel.id)}>Удалить</Dropdown.Item>
-              <Dropdown.Item onClick={handleRenameChannel(channel.id)}>Переименовать</Dropdown.Item>
+              <Dropdown.Item onClick={handleRemoveChannel(channel.id)}>{t('channels.remove')}</Dropdown.Item>
+              <Dropdown.Item onClick={handleRenameChannel(channel.id)}>{t('channels.rename')}</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )
@@ -72,7 +73,7 @@ const ChannelsBox = () => {
   return (
     <>
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-        <b>Каналы</b>
+        <b>{t('channels.channels')}</b>
         <Button
           type="button"
           variant="group-vertical"
