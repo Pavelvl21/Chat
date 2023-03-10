@@ -4,8 +4,8 @@ import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form as FormikForm, useField } from 'formik';
 // import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import logo from '../assets/LoginPage.png';
-
 import useHook from '../hooks/index.js';
 
 const { useAuth } = useHook;
@@ -24,6 +24,7 @@ const TextInput = ({ label, validationClass, ...props }) => {
 };
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const auth = useAuth();
@@ -57,35 +58,34 @@ const LoginPage = () => {
                   <img src={logo} alt="img" height="200" />
                 </div>
                 <FormikForm className="col-12 col-md-6 mt-3 mt-mb-0">
-                  <h1 className="text-center mb-4">Войти</h1>
+                  <h1 className="text-center mb-4">{t('login.header')}</h1>
                   <div className="form-floating mb-3">
                     <TextInput
-                      label="Ваш ник"
+                      label={t('login.username')}
                       name="username"
                       type="text"
-                      placeholder="Ваш ник"
+                      placeholder={t('login.username')}
                       validationClass={authFailed}
                     />
                   </div>
                   <div className="form-floating mb-3">
                     <TextInput
-                      label="Пароль"
+                      label={t('login.password')}
                       name="password"
                       type="password"
-                      placeholder="Пароль"
+                      placeholder={t('login.password')}
                       validationClass={authFailed}
                     />
-                    <div className="invalid-tooltip">Неверные имя пользователя или пароль</div>
+                    <div className="invalid-tooltip">{t('login.authFailed')}</div>
                   </div>
-                  <button type="submit" className="btn btn-outline-primary w-100 mt-2 mb-3">Войти</button>
+                  <button type="submit" className="btn btn-outline-primary w-100 mt-2 mb-3">{t('login.submit')}</button>
                 </FormikForm>
-                <h3>Project not completed</h3>
               </div>
               <div className="card-footer p-4">
                 <div className="text-center">
-                  <span>Нет аккаунта?</span>
+                  <span>{t('login.notAUser')}</span>
                   {' '}
-                  <Link to="/signup">Регистрация</Link>
+                  <Link to="/signup">{t('login.signup')}</Link>
                 </div>
               </div>
             </div>

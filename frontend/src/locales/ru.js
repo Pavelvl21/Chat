@@ -16,5 +16,14 @@ export default {
       messageCount_few: 'сообщения',
       messageCount_many: 'сообщений',
     },
+    login: {
+      header: 'Войти',
+      username: 'Ваш ник',
+      password: 'Пароль',
+      authFailed: 'Неверные имя пользователя или пароль',
+      submit: 'Войти',
+      notAUser: 'Нет аккаунта?',
+      signup: 'Регистрация',
+    },
   },
 };
