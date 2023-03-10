@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { PlusSquare } from 'react-bootstrap-icons';
+import { useTranslation } from 'react-i18next';
 import { actions } from '../slices/index.js';
 
 const Channel = (props) => {
@@ -55,6 +56,7 @@ const Channel = (props) => {
 };
 
 const ChannelsBox = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { channels, currentChannelId } = useSelector((state) => state.channelsData);
   const handleChooseChannel = (channelId) => () => {
