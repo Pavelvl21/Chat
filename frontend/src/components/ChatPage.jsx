@@ -1,17 +1,19 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useHook from '../hooks/index.js';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import ChannelsBox from './ChannelsBox.jsx';
 import ChatBox from './ChatBox.jsx';
 import Modal from './Modals/Modal.jsx';
+import { useTranslation } from 'react-i18next';
 
 const { useAuth } = useHook;
 
 const ChatPage = () => {
+  const { t } = useTranslation();
   const auth = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const ChatPage = () => {
       } catch (error) {
         console.error(error.response);
         if (error.response?.status === 401) {
-          navigate('/login');
+          navigate(routes.loginPagePath());
         }
       }
     };
