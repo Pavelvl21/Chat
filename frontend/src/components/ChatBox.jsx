@@ -8,6 +8,7 @@ import useHook from '../hooks/index.js';
 const { useApi, useAuth } = useHook;
 
 const MessageForm = ({ channel }) => {
+  const { t } = useTranslation();
   const api = useApi();
   const { user: { username } } = useAuth();
   const validateSchema = yup.object().shape({
@@ -40,10 +41,12 @@ const MessageForm = ({ channel }) => {
         <Form.Control
           onChange={formik.handleChange}
           name="body"
+          aria-label={t('chat.newMessage')}
           value={formik.values.body}
           className="border-0 p-0 ps-2"
+          placeholder={t('chat.placeholder')}
         />
-        <Button type="submit">Send</Button>
+        <Button type="submit">{t('chat.send')}</Button>
       </InputGroup>
     </Form>
   );
