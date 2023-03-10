@@ -14,12 +14,13 @@ import AuthProvider from './AuthProvider.jsx';
 import SignupPage from './SignupPage.jsx';
 import '../assets/app.scss';
 import useHook from '../hooks/index.js';
+import routes from '../routes.js';
 
 const { useAuth } = useHook;
 
 const PrivateOutlet = () => {
   const auth = useAuth();
-  return auth.user ? <Outlet /> : <Navigate to="/login" />;
+  return auth.user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />;
 };
 
 const App = () => (
@@ -28,9 +29,9 @@ const App = () => (
       <div className="d-flex flex-column h-100">
         <Navbar />
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/" element={<PrivateOutlet />}>
+          <Route path={routes.loginPagePath()} element={<LoginPage />} />
+          <Route path={routes.signupPagePath()} element={<SignupPage />} />
+          <Route path={routes.chatPagePath()} element={<PrivateOutlet />}>
             <Route path="" element={<ChatPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
