@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from 'react';
-
+import { useState, useMemo } from 'react';
 import '../assets/app.scss';
 import Context from '../contexts/index.js';
 
