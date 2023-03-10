@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Modal as BtsModal, Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { actions } from '../../slices/index.js';
@@ -12,6 +13,7 @@ const getChannelsNames = ({ channelsData: { channels } }) => channels
   .map(({ name }) => name);
 
 const AddChannelModal = ({ handleClose }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector(getChannelsNames);
   const api = useApi();
@@ -25,9 +27,10 @@ const AddChannelModal = ({ handleClose }) => {
     name: yup
       .string()
       .trim()
-      .matches(/^[a-z0-9_-]{3,16}$/)
-      .notOneOf(channels)
-      .required('Required filed'),
+      .min(3, 'modals.min')
+      .max(20, 'modals.max')
+      .notOneOf(channels, 'modals.uniq')
+      .required('modals.required'),
   });
 
   const formik = useFormik({
@@ -50,7 +53,7 @@ const AddChannelModal = ({ handleClose }) => {
   return (
     <>
       <BtsModal.Header closeButton>
-        <BtsModal.Title>Добавить канал</BtsModal.Title>
+        <BtsModal.Title>{t('modals.add')}</BtsModal.Title>
       </BtsModal.Header>
       <BtsModal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -73,14 +76,14 @@ const AddChannelModal = ({ handleClose }) => {
                 type="button"
                 onClick={handleClose}
               >
-                Отменить
+                {t('modals.cancel')}
               </Button>
               <Button
                 variant="primary"
                 type="submit"
                 disabled={formik.isSubmitting}
               >
-                Отправить
+                {t('modals.submit')}
               </Button>
             </div>
           </Form.Group>
