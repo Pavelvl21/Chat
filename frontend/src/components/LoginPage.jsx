@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form as FormikForm, useField } from 'formik';
-// import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import routes from '../routes';
 import logo from '../assets/LoginPage.png';
@@ -33,10 +32,6 @@ const LoginPage = () => {
   return (
     <Formik
       initialValues={{ username: '', password: '' }}
-      // validationSchema={Yup.object().shape({
-      //   username: Yup.string().trim().matches(/^[a-z0-9_-]{3,16}$/).required('Required filed'),
-      //   password: Yup.string().trim().required('Required filed'),
-      // })}
       onSubmit={async (values) => {
         setAuthFailed('');
         try {
