@@ -1,5 +1,6 @@
 export default {
   translation: {
+    appName: 'Hexlet Chat',
     channels: {
       menu: 'Управление каналом',
       remove: 'Удалить',
@@ -25,5 +26,6 @@ export default {
       notAUser: 'Нет аккаунта?',
       signup: 'Регистрация',
     },
+    logout: 'Выйти',
   },
 };

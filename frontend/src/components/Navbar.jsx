@@ -12,8 +12,8 @@ const Navbar = () => {
   return (
     <BtsNavbar bg="white" expand="lg" className="shadow-sm">
       <Container>
-        <BtsNavbar.Brand as={Link} to={routes.chatPagePath()}>Live Chat</BtsNavbar.Brand>
-        {!!user && <Button onClick={logOut}>Выйти</Button>}
+        <BtsNavbar.Brand as={Link} to={routes.chatPagePath()}>{t('appName')}</BtsNavbar.Brand>
+        {!!user && <Button onClick={logOut}>{t('logout')}</Button>}
       </Container>
     </BtsNavbar>
   );
