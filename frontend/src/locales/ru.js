@@ -9,7 +9,11 @@ export default {
     chat: {
       newMessage: 'Новое сообщение',
       placeholder: 'Введите сообщение...',
-      send: 'Отправить',      
+      send: 'Отправить',
+      messageCount_zero: 'сообщений',
+      messageCount_one: 'сообщение',
+      messageCount_few: 'сообщения',
+      messageCount_many: 'сообщений',
     },
   },
 };
