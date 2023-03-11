@@ -42,6 +42,7 @@ export default {
       password: 'Пароль',
       confirm: 'Подтвердите пароль',
       submit: 'Зарегистрироваться',
+      notUniq: 'Такой пользователь уже существует',
     },
     modals: {
       min: 'От 3 до 20 символов',
@@ -56,6 +57,10 @@ export default {
       confirmation: 'Уверены?',
       confirm: 'Удалить',
       channelName: 'Имя канала',
+    },
+    errors: {
+      network: 'Ошибка соединения',
+      unknown: 'Неизвестная ошибка',
     },
   },
 };
