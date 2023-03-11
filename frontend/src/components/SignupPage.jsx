@@ -89,6 +89,7 @@ const SignupPage = () => {
                     value={formik.values.password}
                     placeholder={t('signup.passLengthLimit')}
                     name="password"
+                    id="password"
                     autoComplete="new-password"
                     required
                   />
@@ -101,6 +102,7 @@ const SignupPage = () => {
                     value={formik.values.confirmPassword}
                     placeholder={t('signup.matches')}
                     name="confirmPassword"
+                    id="confirmPassword"
                     autoComplete="new-password"
                     required
                   />
