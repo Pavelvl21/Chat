@@ -72,6 +72,7 @@ const SignupPage = () => {
                   <Form.Control
                     type="text"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.username}
                     placeholder={t('signup.lengthLimit')}
                     name="username"
@@ -86,6 +87,7 @@ const SignupPage = () => {
                   <Form.Control
                     type="password"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.password}
                     placeholder={t('signup.passLengthLimit')}
                     name="password"
@@ -99,6 +101,7 @@ const SignupPage = () => {
                   <Form.Control
                     type="password"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.confirmPassword}
                     placeholder={t('signup.matches')}
                     name="confirmPassword"

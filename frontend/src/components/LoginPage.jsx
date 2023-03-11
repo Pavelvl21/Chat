@@ -59,6 +59,7 @@ const LoginPage = () => {
                     <TextInput
                       label={t('login.username')}
                       name="username"
+                      id="username"
                       type="text"
                       placeholder={t('login.username')}
                       validationClass={authFailed}
@@ -68,6 +69,7 @@ const LoginPage = () => {
                     <TextInput
                       label={t('login.password')}
                       name="password"
+                      id="password"
                       type="password"
                       placeholder={t('login.password')}
                       validationClass={authFailed}
