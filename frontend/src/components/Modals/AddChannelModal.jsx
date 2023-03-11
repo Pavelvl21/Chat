@@ -3,6 +3,7 @@ import { Modal as BtsModal, Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { actions } from '../../slices/index.js';
 import useHook from '../../hooks/index.js';
@@ -43,6 +44,7 @@ const AddChannelModal = ({ handleClose }) => {
       try {
         const data = await api.createChannel(channel);
         dispatch(actions.setCurrentChannel({ channelId: data.id }));
+        toast.success(t('channels.created'));
         handleClose();
       } catch (error) {
         console.error(error);

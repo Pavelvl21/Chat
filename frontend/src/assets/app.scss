@@ -2,6 +2,7 @@
 // Option B: Include parts of Bootstrap
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import '~react-toastify/dist/ReactToastify.css';
 @import "~bootstrap/scss/mixins/banner";
 @include bsBanner("");
 @import "~bootstrap/scss/functions";

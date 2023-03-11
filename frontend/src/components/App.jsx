@@ -6,6 +6,7 @@ import {
   Outlet,
   Navigate,
 } from 'react-router-dom';
+import { ToastContainer as Toaster } from 'react-toastify';
 import NotFoundPage from './NotFoundPage.jsx';
 import LoginPage from './LoginPage.jsx';
 import ChatPage from './ChatPage.jsx';
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
+      <Toaster />
     </Router>
   </AuthProvider>
 );

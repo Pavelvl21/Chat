@@ -3,6 +3,7 @@ import { Modal as BtsModal, Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import useHook from '../../hooks/index.js';
 
@@ -41,6 +42,7 @@ const RenameChannelModal = ({ handleClose }) => {
     onSubmit: async ({ name }) => {
       try {
         await api.renameChannel({ name, id: channelId });
+        toast.success(t('channels.renamed'));
         handleClose();
       } catch (error) {
         console.error(error);
