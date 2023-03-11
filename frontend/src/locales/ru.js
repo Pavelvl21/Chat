@@ -7,6 +7,9 @@ export default {
       rename: 'Переименовать',
       channels: 'Каналы',
       creatingChannel: '...',
+      created: 'Канал создан',
+      renamed: 'Канал переименован',
+      removed: 'Канал удалён',
     },
     chat: {
       newMessage: 'Новое сообщение',
