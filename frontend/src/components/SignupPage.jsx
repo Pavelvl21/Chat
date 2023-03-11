@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -16,6 +16,11 @@ const SignupPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const auth = useAuth();
+  const [isSubmitting, setSubmitting] = useState(false);
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -37,6 +42,7 @@ const SignupPage = () => {
         .oneOf([yup.ref('password')], t('signup.matches')),
     }),
     onSubmit: async (values) => {
+      setSubmitting(false);
       try {
         const { data } = await axios.post(
           routes.signupApiPath(),
@@ -45,14 +51,15 @@ const SignupPage = () => {
         auth.logIn(data);
         navigate(routes.chatPagePath());
       } catch (error) {
+        if (error.response.status === 409) {
+          setSubmitting(true);
+          inputRef.current.select();
+          return;
+        }
         console.error(error.message);
       }
     },
   });
-  const inputRef = useRef();
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
 
   return (
     <div className="container-fluid h-100">
@@ -79,9 +86,13 @@ const SignupPage = () => {
                     id="username"
                     autoComplete="new-username"
                     required
+                    isInvalid={formik.errors.username && formik.touched.username}
                     ref={inputRef}
                   />
                   <Form.Label htmlFor="username">{t('signup.username')}</Form.Label>
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {t(formik.errors.username)}
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
@@ -93,9 +104,13 @@ const SignupPage = () => {
                     name="password"
                     id="password"
                     autoComplete="new-password"
+                    isInvalid={formik.errors.password && formik.touched.password}
                     required
                   />
                   <Form.Label htmlFor="password">{t('signup.password')}</Form.Label>
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {t(formik.errors.password)}
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
@@ -107,9 +122,15 @@ const SignupPage = () => {
                     name="confirmPassword"
                     id="confirmPassword"
                     autoComplete="new-password"
+                    isInvalid={formik.errors.confirmPassword && formik.touched.confirmPassword}
                     required
                   />
                   <Form.Label htmlFor="confirmPassword">{t('signup.confirm')}</Form.Label>
+                  <Form.Control.Feedback type="invalid" tooltip>
+                    {isSubmitting
+                      ? t('signup.notUniq')
+                      : t(formik.errors.confirmPassword)}
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Button type="submit" variant="outline-primary" className="w-100">{t('signup.submit')}</Button>
               </Form>
