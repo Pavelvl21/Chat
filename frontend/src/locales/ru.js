@@ -55,6 +55,7 @@ export default {
       remove: 'Удалить канал',
       confirmation: 'Уверены?',
       confirm: 'Удалить',
+      channelName: 'Имя канала',
     },
   },
 };

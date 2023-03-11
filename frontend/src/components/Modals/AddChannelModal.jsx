@@ -68,7 +68,7 @@ const AddChannelModal = ({ handleClose }) => {
               name="name"
               id="name"
             />
-            <label className="visually-hidden" htmlFor="name">{formik.name}</label>
+            <label className="visually-hidden" htmlFor="name">{t('modals.channelName')}</label>
             <div className="d-flex justify-content-end">
               <Button
                 className="me-2"
