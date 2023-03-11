@@ -36,7 +36,7 @@ export default {
       lengthLimit: 'От 3 до 20 символов',
       required: 'Обязательное поле',
       passLengthLimit: 'Не менее 6 символов',
-      mathes: 'Пароли должны совпадать',
+      maches: 'Пароли должны совпадать',
       header: 'Регистрация',
       username: 'Имя пользователя',
       password: 'Пароль',
