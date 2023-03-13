@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Button, Form, InputGroup } from 'react-bootstrap';
@@ -43,14 +43,20 @@ const MessageForm = ({ channel }) => {
     },
   });
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [channel]);
+
   const isInvalid = !formik.dirty || !formik.isValid;
 
   return (
     <Form onSubmit={formik.handleSubmit} className="py-1 border rounded-2">
       <InputGroup>
         <Form.Control
+          ref={inputRef}
           onChange={formik.handleChange}
           name="body"
+          disabled={formik.isSubmitting}
           aria-label={t('chat.newMessage')}
           value={formik.values.body}
           className="border-0 p-0 ps-2"
