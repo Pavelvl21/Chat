@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import { animateScroll } from 'react-scroll';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { ArrowRightSquare } from 'react-bootstrap-icons';
 import * as yup from 'yup';
@@ -13,12 +14,16 @@ const MessageForm = ({ channel }) => {
   const { t } = useTranslation();
   const api = useApi();
   const { user: { username } } = useAuth();
-  const inputRef = useRef();
   const validateSchema = yup.object().shape({
     body: yup
       .string()
       .trim()
       .required('Required'),
+  });
+
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current?.focus();
   });
 
   const formik = useFormik({
@@ -42,10 +47,6 @@ const MessageForm = ({ channel }) => {
       inputRef.current.focus();
     },
   });
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, [channel]);
 
   const isInvalid = !formik.dirty || !formik.isValid;
 
@@ -83,6 +84,10 @@ const ChatBox = () => {
     const { currentChannelId } = state.channelsData;
     return messages.filter(({ channelId }) => channelId === currentChannelId);
   });
+
+  useEffect(() => {
+    animateScroll.scrollToBottom({ containerId: 'message-box', delay: 0, duration: 0 });
+  }, [channelMessages.length]);
 
   return (
     <div className="d-flex flex-column h-100">
